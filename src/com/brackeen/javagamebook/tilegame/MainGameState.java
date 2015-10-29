@@ -39,6 +39,7 @@ public class MainGameState implements GameState {
     private GameAction moveRight;
     private GameAction jump;
     private GameAction exit;
+    private GameAction shoot;
 
     public MainGameState(SoundManager soundManager,
         MidiPlayer midiPlayer, int width, int height)
@@ -53,6 +54,7 @@ public class MainGameState implements GameState {
             GameAction.DETECT_INITAL_PRESS_ONLY);
         exit = new GameAction("exit",
             GameAction.DETECT_INITAL_PRESS_ONLY);
+        shoot = new GameAction("shoot");
 
         renderer = new TileMapRenderer();
         toggleDrumPlayback();
@@ -91,6 +93,7 @@ public class MainGameState implements GameState {
         inputManager.mapToKey(jump, KeyEvent.VK_SPACE);
         inputManager.mapToKey(jump, KeyEvent.VK_UP);
         inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
+        inputManager.mapToKey(shoot, KeyEvent.VK_S);
 
         soundManager.setPaused(false);
         midiPlayer.setPaused(false);
@@ -138,6 +141,9 @@ public class MainGameState implements GameState {
             }
             if (jump.isPressed()) {
                 player.jump(false);
+            }
+            if (shoot.isPressed()) {
+                resourceManager.addBullet(player, map);
             }
             player.setVelocityX(velocityX);
         }

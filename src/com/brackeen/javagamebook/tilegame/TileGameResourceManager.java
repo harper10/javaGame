@@ -29,6 +29,7 @@ public class TileGameResourceManager extends ResourceManager {
     private Sprite goalSprite;
     private Sprite grubSprite;
     private Sprite flySprite;
+    private Sprite playerBulletSprite;
 
     /**
         Creates a new ResourceManager with the specified
@@ -45,6 +46,7 @@ public class TileGameResourceManager extends ResourceManager {
         loadTileImages();
         loadCreatureSprites();
         loadPowerUpSprites();
+        loadBulletSprites();
     }
 
 
@@ -177,6 +179,31 @@ public class TileGameResourceManager extends ResourceManager {
             // add it to the map
             map.addSprite(sprite);
         }
+    }
+
+    public void addBullet(Player player, TileMap map){
+        /*addSprite(map, playerBulletSprite,
+                TileMapRenderer.pixelsToTiles(player.getX()),
+                TileMapRenderer.pixelsToTiles(player.getY()) );*/
+        int tileX = TileMapRenderer.pixelsToTiles(player.getX());
+        int tileY = TileMapRenderer.pixelsToTiles(player.getY());
+        Sprite sprite = (Sprite)playerBulletSprite.clone();
+
+        // center the sprite
+        sprite.setX(
+                TileMapRenderer.tilesToPixels(tileX) +
+                        (TileMapRenderer.tilesToPixels(1) -
+                                sprite.getWidth()) / 2);
+
+        // bottom-justify the sprite
+        sprite.setY(
+                TileMapRenderer.tilesToPixels(tileY + 1) -
+                        sprite.getHeight());
+
+        sprite.setVelocityX(1f);
+
+        // add it to the map
+        map.addSprite(sprite);
     }
 
 
@@ -314,4 +341,12 @@ public class TileGameResourceManager extends ResourceManager {
         musicSprite = new PowerUp.Music(anim);
     }
 
+    private void loadBulletSprites() {
+        Animation anim = new Animation();
+        anim.addFrame(loadImage("canyon_rock_1.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_2.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_3.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_4.png"), 150);
+        playerBulletSprite = new PlayerBullet(anim);
+    }
 }

@@ -1,6 +1,9 @@
 package com.brackeen.javagamebook.tilegame.sprites;
 
 import com.brackeen.javagamebook.graphics.Animation;
+import com.brackeen.javagamebook.graphics.Sprite;
+import com.brackeen.javagamebook.tilegame.TileGameResourceManager;
+import com.brackeen.javagamebook.tilegame.TileMap;
 
 /**
     The Player.
@@ -10,6 +13,7 @@ public class Player extends Creature {
     private static final float JUMP_SPEED = -.95f;
 
     private boolean onGround;
+    private Sprite playerBulletSprite;
 
     public Player(Animation left, Animation right,
         Animation deadLeft, Animation deadRight)
@@ -56,6 +60,7 @@ public class Player extends Creature {
             setVelocityY(JUMP_SPEED);
         }
     }
+
 
 
     public float getMaxSpeed() {
