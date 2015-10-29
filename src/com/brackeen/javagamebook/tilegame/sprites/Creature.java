@@ -173,4 +173,10 @@ public abstract class Creature extends Sprite {
         }
     }
 
+    public boolean isFacingRight(){
+        if (anim == right){
+            return true;
+        }
+        return false;
+    }
 }

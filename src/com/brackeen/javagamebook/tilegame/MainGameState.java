@@ -143,7 +143,7 @@ public class MainGameState implements GameState {
                 player.jump(false);
             }
             if (shoot.isPressed()) {
-                resourceManager.addBullet(player, map);
+                resourceManager.addBullet(player, map, player.isFacingRight());
             }
             player.setVelocityX(velocityX);
         }

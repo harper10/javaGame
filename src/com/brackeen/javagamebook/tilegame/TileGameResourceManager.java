@@ -181,7 +181,7 @@ public class TileGameResourceManager extends ResourceManager {
         }
     }
 
-    public void addBullet(Player player, TileMap map){
+    public void addBullet(Player player, TileMap map, boolean right){
         /*addSprite(map, playerBulletSprite,
                 TileMapRenderer.pixelsToTiles(player.getX()),
                 TileMapRenderer.pixelsToTiles(player.getY()) );*/
@@ -200,7 +200,12 @@ public class TileGameResourceManager extends ResourceManager {
                 TileMapRenderer.tilesToPixels(tileY + 1) -
                         sprite.getHeight());
 
-        sprite.setVelocityX(1f);
+        if (right){
+            sprite.setVelocityX(.5f);
+        }
+        else{
+            sprite.setVelocityX(-.5f);
+        }
 
         // add it to the map
         map.addSprite(sprite);
