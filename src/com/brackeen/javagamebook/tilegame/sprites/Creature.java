@@ -25,6 +25,7 @@ public abstract class Creature extends Sprite {
     private Animation deadRight;
     private int state;
     private long stateTime;
+    private boolean awake = false;
 
     /**
         Creates a new Creature with the specified Animations.
@@ -75,9 +76,9 @@ public abstract class Creature extends Sprite {
     public void wakeUp() {
         if (getState() == STATE_NORMAL && getVelocityX() == 0) {
             setVelocityX(-getMaxSpeed());
-
         }
         //TODO add creature shooting
+        awake = true;
     }
 
 
@@ -177,5 +178,9 @@ public abstract class Creature extends Sprite {
 
     public boolean isFacingRight(){
         return (anim == right);
+    }
+
+    public boolean isAwake() {
+        return awake;
     }
 }

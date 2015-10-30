@@ -84,6 +84,7 @@
             classpath="tilegame.jar;tilegameres.jar"
             fork="true"
             dir="${basedir}"
+            error="error.log"
             failonerror="true"
             >
         <jvmarg value="-Xprof"/>

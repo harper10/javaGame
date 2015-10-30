@@ -3,6 +3,7 @@ package com.brackeen.javagamebook.tilegame;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
+import java.util.LinkedList;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 
@@ -28,7 +29,7 @@ public class MainGameState implements GameState {
 
     private long totalTime = 0;
     private long shootTime;
-    private long creatureShootTime = 400;
+    private long creatureShootTime = 500;
     private int bullet_count = 0;
 
     private Point pointCache = new Point();
@@ -273,6 +274,7 @@ public class MainGameState implements GameState {
     */
     public void update(long elapsedTime) {
         Creature player = (Creature)map.getPlayer();
+        LinkedList<Creature> creatures= new LinkedList<>();
 
 
         // player is dead! start map over
@@ -299,9 +301,12 @@ public class MainGameState implements GameState {
                 }
                 else {
                     updateCreature(creature, elapsedTime);
+                    if (creature.isAwake() && creature.isAlive()){
+                        creatures.add(creature);
+                    }
                 }
             }
-            else if (sprite instanceof Bullet && ((Bullet)sprite).isPlayerBullet){
+            else if (sprite instanceof Bullet){
                 if (((Bullet)sprite).isDead()){
                     i.remove();
                 }
@@ -316,6 +321,15 @@ public class MainGameState implements GameState {
             // normal update
             sprite.update(elapsedTime);
         }
+        creatureShootTime += elapsedTime;
+        long creatureShootInterval = 500;
+        if (creatureShootTime > creatureShootInterval) {
+            for (Creature c : creatures) {
+                resourceManager.addBullet(c, map, c.isFacingRight(), false);
+            }
+            creatureShootTime = 0;
+        }
+
     }
 
 
@@ -337,8 +351,6 @@ public class MainGameState implements GameState {
         float dx = creature.getVelocityX();
         float oldX = creature.getX();
         float newX = oldX + dx * elapsedTime;
-        creatureShootTime += elapsedTime;
-        long creatureShootInterval = 400;
         Point tile =
             getTileCollision(creature, newX, creature.getY());
         if (tile == null) {
@@ -361,10 +373,7 @@ public class MainGameState implements GameState {
             checkPlayerCollision((Player)creature, false);
         }
         else {
-            if (dx > 0 && creatureShootTime > creatureShootInterval){
-                resourceManager.addBullet(creature, map, creature.isFacingRight(), false);
-                creatureShootTime = 0;
-            }
+
 
             Sprite collisionSprite = getSpriteCollision(creature);
             if (collisionSprite instanceof Bullet && ((Bullet)collisionSprite).isPlayerBullet) {
@@ -372,6 +381,7 @@ public class MainGameState implements GameState {
                 creature.setState(Creature.STATE_DYING);
                 ((Bullet)collisionSprite).setDead();
             }
+
         }
 
 

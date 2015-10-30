@@ -51,7 +51,7 @@ public class Bullet extends Sprite {
     @Override
     public void update(long elapsedTime) {
         super.update(elapsedTime);
-        int distToDie = 5;
+        int distToDie = 7;
         if (Math.abs((TileMapRenderer.pixelsToTiles(getX()) - startX)) > distToDie){
             setDead();
         }
