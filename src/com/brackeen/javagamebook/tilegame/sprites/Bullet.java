@@ -10,10 +10,13 @@ public class Bullet extends Sprite {
     private boolean dead = false;
 
     public boolean isPlayerBullet = false;
+    private float distToDie = 7f;
+    private float startX;
 
     public Bullet(Animation anim, boolean isPlayerBullet){
         super(anim);
         this.isPlayerBullet = isPlayerBullet;
+        this.startX = this.getX();
     }
 
     public float getMaxSpeed() {
@@ -39,5 +42,14 @@ public class Bullet extends Sprite {
 
     public void setDead(){
         this.dead = true;
+    }
+
+    @Override
+    public void update(long elapsedTime) {
+        super.update(elapsedTime);
+        //TODO add in self dying to bullets
+        if (Math.abs(getX()-startX) > distToDie){
+            setDead();
+        }
     }
 }

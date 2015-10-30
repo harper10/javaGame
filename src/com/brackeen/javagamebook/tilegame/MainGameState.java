@@ -150,15 +150,16 @@ public class MainGameState implements GameState {
                 long wait_time = 1000;
 
                 totalTime += elapsedTime;
-                if (totalTime >= shootTime && bullet_count <= 10) {
+                if (totalTime >= wait_time){
+                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    bullet_count = 1;
+                }
+                else if (totalTime >= shootTime && bullet_count <= 10) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalTime = 0;
                     bullet_count++;
                 }
-                else if (totalTime >= wait_time){
-                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
-                    bullet_count = 1;
-                }
+
 
             }
             player.setVelocityX(velocityX);
