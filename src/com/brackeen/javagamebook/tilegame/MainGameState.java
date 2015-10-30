@@ -28,6 +28,7 @@ public class MainGameState implements GameState {
 
     private long totalTime = 0;
     private long shootTime;
+    private long creatureShootTime = 400;
     private int bullet_count = 0;
 
     private Point pointCache = new Point();
@@ -336,12 +337,14 @@ public class MainGameState implements GameState {
         float dx = creature.getVelocityX();
         float oldX = creature.getX();
         float newX = oldX + dx * elapsedTime;
+        creatureShootTime += elapsedTime;
+        long creatureShootInterval = 400;
         Point tile =
             getTileCollision(creature, newX, creature.getY());
         if (tile == null) {
             creature.setX(newX);
-        }
-        else {
+
+        } else {
             // line up with the tile boundary
             if (dx > 0) {
                 creature.setX(
@@ -358,14 +361,19 @@ public class MainGameState implements GameState {
             checkPlayerCollision((Player)creature, false);
         }
         else {
-            Sprite collisionSprite = getSpriteCollision(creature);
+            if (dx > 0 && creatureShootTime > creatureShootInterval){
+                resourceManager.addBullet(creature, map, creature.isFacingRight(), false);
+                creatureShootTime = 0;
+            }
 
+            Sprite collisionSprite = getSpriteCollision(creature);
             if (collisionSprite instanceof Bullet && ((Bullet)collisionSprite).isPlayerBullet) {
-                //play bullet hitting noise
+                //TODO play bullet hitting noise
                 creature.setState(Creature.STATE_DYING);
                 ((Bullet)collisionSprite).setDead();
             }
         }
+
 
 
 

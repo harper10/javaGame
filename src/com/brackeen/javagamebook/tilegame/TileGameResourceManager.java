@@ -182,7 +182,7 @@ public class TileGameResourceManager extends ResourceManager {
         }
     }
 
-    public void addBullet(Creature creature, TileMap map, boolean right, boolean isPlayer){
+    public void addBullet(Creature creature, TileMap map, boolean isRight, boolean isPlayer){
         /*addSprite(map, playerBulletSprite,
                 TileMapRenderer.pixelsToTiles(player.getX()),
                 TileMapRenderer.pixelsToTiles(player.getY()) );*/
@@ -203,7 +203,7 @@ public class TileGameResourceManager extends ResourceManager {
         // bottom-justify the bullet
         bullet.setY(TileMapRenderer.tilesToPixels(tileY + 1) - bullet.getHeight());
         bullet.setStartX();
-        if (right){
+        if (isRight){
             bullet.setVelocityX(bullet.getMaxSpeed());
         }
         else{

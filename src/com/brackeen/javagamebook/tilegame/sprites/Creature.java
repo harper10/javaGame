@@ -75,6 +75,7 @@ public abstract class Creature extends Sprite {
     public void wakeUp() {
         if (getState() == STATE_NORMAL && getVelocityX() == 0) {
             setVelocityX(-getMaxSpeed());
+
         }
         //TODO add creature shooting
     }
@@ -175,9 +176,6 @@ public abstract class Creature extends Sprite {
     }
 
     public boolean isFacingRight(){
-        if (anim == right){
-            return true;
-        }
-        return false;
+        return true;//(anim == right);
     }
 }

@@ -51,7 +51,6 @@ public class Bullet extends Sprite {
     @Override
     public void update(long elapsedTime) {
         super.update(elapsedTime);
-        //TODO add in self dying to bullets
         int distToDie = 5;
         if (Math.abs((TileMapRenderer.pixelsToTiles(getX()) - startX)) > distToDie){
             setDead();
