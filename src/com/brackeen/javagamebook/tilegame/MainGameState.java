@@ -143,7 +143,7 @@ public class MainGameState implements GameState {
                 player.jump(false);
             }
             if (shoot.isPressed()) {
-                resourceManager.addBullet(player, map, player.isFacingRight());
+                resourceManager.addBullet(player, map, player.isFacingRight(), true);
             }
             player.setVelocityX(velocityX);
         }
@@ -279,8 +279,8 @@ public class MainGameState implements GameState {
                     updateCreature(creature, elapsedTime);
                 }
             }
-            else if (sprite instanceof PlayerBullet){
-                if (((PlayerBullet)sprite).isDead()){
+            else if (sprite instanceof Bullet && ((Bullet)sprite).isPlayerBullet){
+                if (((Bullet)sprite).isDead()){
                     i.remove();
                 }
                 else {
@@ -339,10 +339,10 @@ public class MainGameState implements GameState {
         else {
             Sprite collisionSprite = getSpriteCollision(creature);
 
-            if (collisionSprite instanceof PlayerBullet) {
+            if (collisionSprite instanceof Bullet && ((Bullet)collisionSprite).isPlayerBullet) {
                 //play bullet hitting noise
                 creature.setState(Creature.STATE_DYING);
-                ((PlayerBullet)collisionSprite).setDead();
+                ((Bullet)collisionSprite).setDead();
                 //map.removeSprite(collisionSprite);
             }
         }
@@ -409,12 +409,18 @@ public class MainGameState implements GameState {
                 player.setState(Creature.STATE_DYING);
             }
         }
-        //else if (collisionSprite instanceof creatureBullet){}
+        else if (collisionSprite instanceof Bullet && !((Bullet)collisionSprite).isPlayerBullet){
+            ((Bullet)collisionSprite).setDead();
+            player.bulletHit();
+            if (player.getHealth() == 0){
+                player.setState(Creature.STATE_DEAD);
+            }
+        }
     }
 
 
     /**
-        Gives the player the speicifed power up and removes it
+        Gives the player the specified power up and removes it
         from the map.
     */
     public void acquirePowerUp(PowerUp powerUp) {
