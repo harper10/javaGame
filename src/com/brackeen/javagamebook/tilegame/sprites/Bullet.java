@@ -2,6 +2,7 @@ package com.brackeen.javagamebook.tilegame.sprites;
 
 import com.brackeen.javagamebook.graphics.Animation;
 import com.brackeen.javagamebook.graphics.Sprite;
+import com.brackeen.javagamebook.tilegame.TileMapRenderer;
 
 /**
  * Created by arthur on 10/29/15.
@@ -10,18 +11,17 @@ public class Bullet extends Sprite {
     private boolean dead = false;
 
     public boolean isPlayerBullet = false;
-    private float distToDie = 7f;
-    private float startX;
+    private int startX;
 
     public Bullet(Animation anim, boolean isPlayerBullet){
         super(anim);
         this.isPlayerBullet = isPlayerBullet;
-        this.startX = this.getX();
+
     }
 
     public float getMaxSpeed() {
         if (isPlayerBullet) {
-            return .5f;
+            return .6f;
         }
         else{
             return .25f;
@@ -44,11 +44,16 @@ public class Bullet extends Sprite {
         this.dead = true;
     }
 
+    public void setStartX(){
+        this.startX = TileMapRenderer.pixelsToTiles(getX());
+    }
+
     @Override
     public void update(long elapsedTime) {
         super.update(elapsedTime);
         //TODO add in self dying to bullets
-        if (Math.abs(getX()-startX) > distToDie){
+        int distToDie = 5;
+        if (Math.abs((TileMapRenderer.pixelsToTiles(getX()) - startX)) > distToDie){
             setDead();
         }
     }

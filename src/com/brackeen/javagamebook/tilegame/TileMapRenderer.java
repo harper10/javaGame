@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.Iterator;
 
 import com.brackeen.javagamebook.graphics.Sprite;
+import com.brackeen.javagamebook.tilegame.sprites.Bullet;
 import com.brackeen.javagamebook.tilegame.sprites.Creature;
 
 /**
@@ -145,6 +146,10 @@ public class TileMapRenderer {
                 x >= 0 && x < screenWidth)
             {
                 ((Creature)sprite).wakeUp();
+            }
+            else if (sprite instanceof Bullet &&
+                    !(x >= 0 && x < screenWidth)){
+                ((Bullet)sprite).setDead();
             }
         }
     }

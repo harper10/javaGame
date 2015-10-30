@@ -27,6 +27,7 @@ public class MainGameState implements GameState {
     private int height;
 
     private long totalTime = 0;
+    private long shootTime;
     private int bullet_count = 0;
 
     private Point pointCache = new Point();
@@ -145,22 +146,25 @@ public class MainGameState implements GameState {
             if (jump.isPressed()) {
                 player.jump(false);
             }
+            totalTime += elapsedTime;
             if (shoot.isPressed()) {
-                long shootTime = 50;//long time between shots
                 long wait_time = 1000;
 
-                totalTime += elapsedTime;
                 if (totalTime >= wait_time){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
+                    totalTime = 0;
+                    shootTime = 200;
                 }
                 else if (totalTime >= shootTime && bullet_count <= 10) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalTime = 0;
                     bullet_count++;
+                    shootTime = 200;
                 }
-
-
+            }
+            if (shoot.getAmount() == 0){
+                shootTime = 300;
             }
             player.setVelocityX(velocityX);
         }

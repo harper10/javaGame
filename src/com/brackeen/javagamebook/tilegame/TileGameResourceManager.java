@@ -186,7 +186,7 @@ public class TileGameResourceManager extends ResourceManager {
         /*addSprite(map, playerBulletSprite,
                 TileMapRenderer.pixelsToTiles(player.getX()),
                 TileMapRenderer.pixelsToTiles(player.getY()) );*/
-        int tileX = TileMapRenderer.pixelsToTiles(creature.getX());
+        int tileX = TileMapRenderer.pixelsToTiles(creature.getX()+ creature.getWidth()/2);
         int tileY = TileMapRenderer.pixelsToTiles(creature.getY());
         Bullet bullet;
         if (isPlayer) {
@@ -197,16 +197,12 @@ public class TileGameResourceManager extends ResourceManager {
         }
 
         // center the bullet
-        bullet.setX(
-                TileMapRenderer.tilesToPixels(tileX) +
-                        (TileMapRenderer.tilesToPixels(1) -
+        bullet.setX(TileMapRenderer.tilesToPixels(tileX) + (TileMapRenderer.tilesToPixels(1) -
                                 bullet.getWidth()) / 2);
 
         // bottom-justify the bullet
-        bullet.setY(
-                TileMapRenderer.tilesToPixels(tileY + 1) -
-                        bullet.getHeight());
-
+        bullet.setY(TileMapRenderer.tilesToPixels(tileY + 1) - bullet.getHeight());
+        bullet.setStartX();
         if (right){
             bullet.setVelocityX(bullet.getMaxSpeed());
         }
