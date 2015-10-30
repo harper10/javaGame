@@ -14,6 +14,9 @@ public class Player extends Creature {
 
     private boolean onGround;
 
+    private int health = 20;
+    private static final int healthMax = 40;
+
     public Player(Animation left, Animation right,
         Animation deadLeft, Animation deadRight)
     {
@@ -60,10 +63,40 @@ public class Player extends Creature {
         }
     }
 
-
-
     public float getMaxSpeed() {
         return 0.5f;
     }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void bulletHit(){
+        if (health > 5){
+            health -= 5;
+        }
+        else {
+            health = 0;
+        }
+    }
+
+    public void creatureDeath(){
+        if (health < healthMax - 10){
+            health += 10;
+        }
+        else {
+            health = healthMax;
+        }
+    }
+
+    public void motionlessHealth(){
+        if (health < healthMax - 5){
+            health += 5;
+        }
+        else {
+            health = healthMax;
+        }
+    }
+
 
 }

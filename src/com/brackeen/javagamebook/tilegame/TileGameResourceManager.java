@@ -30,6 +30,7 @@ public class TileGameResourceManager extends ResourceManager {
     private Sprite grubSprite;
     private Sprite flySprite;
     private Sprite playerBulletSprite;
+    private Sprite creatureBulletSprite;
 
     /**
         Creates a new ResourceManager with the specified
@@ -181,34 +182,40 @@ public class TileGameResourceManager extends ResourceManager {
         }
     }
 
-    public void addBullet(Player player, TileMap map, boolean right){
+    public void addBullet(Creature creature, TileMap map, boolean right, boolean isPlayer){
         /*addSprite(map, playerBulletSprite,
                 TileMapRenderer.pixelsToTiles(player.getX()),
                 TileMapRenderer.pixelsToTiles(player.getY()) );*/
-        int tileX = TileMapRenderer.pixelsToTiles(player.getX());
-        int tileY = TileMapRenderer.pixelsToTiles(player.getY());
-        Sprite sprite = (Sprite)playerBulletSprite.clone();
-
-        // center the sprite
-        sprite.setX(
-                TileMapRenderer.tilesToPixels(tileX) +
-                        (TileMapRenderer.tilesToPixels(1) -
-                                sprite.getWidth()) / 2);
-
-        // bottom-justify the sprite
-        sprite.setY(
-                TileMapRenderer.tilesToPixels(tileY + 1) -
-                        sprite.getHeight());
-
-        if (right){
-            sprite.setVelocityX(.5f);
+        int tileX = TileMapRenderer.pixelsToTiles(creature.getX());
+        int tileY = TileMapRenderer.pixelsToTiles(creature.getY());
+        Bullet bullet;
+        if (isPlayer) {
+            bullet = (Bullet) playerBulletSprite.clone();
         }
         else{
-            sprite.setVelocityX(-.5f);
+            bullet = (Bullet) creatureBulletSprite.clone();
+        }
+
+        // center the bullet
+        bullet.setX(
+                TileMapRenderer.tilesToPixels(tileX) +
+                        (TileMapRenderer.tilesToPixels(1) -
+                                bullet.getWidth()) / 2);
+
+        // bottom-justify the bullet
+        bullet.setY(
+                TileMapRenderer.tilesToPixels(tileY + 1) -
+                        bullet.getHeight());
+
+        if (right){
+            bullet.setVelocityX(bullet.getMaxSpeed());
+        }
+        else{
+            bullet.setVelocityX(-bullet.getMaxSpeed());
         }
 
         // add it to the map
-        map.addSprite(sprite);
+        map.addSprite(bullet);
     }
 
 
@@ -347,11 +354,18 @@ public class TileGameResourceManager extends ResourceManager {
     }
 
     private void loadBulletSprites() {
-        Animation anim = new Animation();
+        Animation anim= new Animation();
         anim.addFrame(loadImage("canyon_rock_1.png"), 150);
         anim.addFrame(loadImage("canyon_rock_2.png"), 150);
         anim.addFrame(loadImage("canyon_rock_3.png"), 150);
         anim.addFrame(loadImage("canyon_rock_4.png"), 150);
-        playerBulletSprite = new PlayerBullet(anim);
+        playerBulletSprite = new Bullet(anim, true);
+
+        anim = new Animation();
+        anim.addFrame(loadImage("canyon_rock_1.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_2.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_3.png"), 150);
+        anim.addFrame(loadImage("canyon_rock_4.png"), 150);
+        creatureBulletSprite = new Bullet(anim, false);
     }
 }

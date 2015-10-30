@@ -76,6 +76,7 @@ public abstract class Creature extends Sprite {
         if (getState() == STATE_NORMAL && getVelocityX() == 0) {
             setVelocityX(-getMaxSpeed());
         }
+        //TODO add creature shooting
     }
 
 
