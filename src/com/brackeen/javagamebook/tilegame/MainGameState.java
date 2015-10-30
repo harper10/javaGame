@@ -26,6 +26,9 @@ public class MainGameState implements GameState {
     private int width;
     private int height;
 
+    private long totalTime = 0;
+    private int bullet_count = 0;
+
     private Point pointCache = new Point();
     private Sound prizeSound;
     private Sound boopSound;
@@ -143,7 +146,20 @@ public class MainGameState implements GameState {
                 player.jump(false);
             }
             if (shoot.isPressed()) {
-                resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                long shootTime = 50;//long time between shots
+                long wait_time = 1000;
+
+                totalTime += elapsedTime;
+                if (totalTime >= shootTime && bullet_count <= 10) {
+                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    totalTime = 0;
+                    bullet_count++;
+                }
+                else if (totalTime >= wait_time){
+                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    bullet_count = 1;
+                }
+
             }
             player.setVelocityX(velocityX);
         }
@@ -343,7 +359,6 @@ public class MainGameState implements GameState {
                 //play bullet hitting noise
                 creature.setState(Creature.STATE_DYING);
                 ((Bullet)collisionSprite).setDead();
-                //map.removeSprite(collisionSprite);
             }
         }
 
