@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21cb2cc7-f00c-4176-b91c-2e71ce1dfb57" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/sprites/Creature.class" afterPath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/sprites/Creature.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/MainGameState.class" afterPath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/MainGameState.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/sprites/Player.class" afterPath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/sprites/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/TileGameResourceManager.class" afterPath="$PROJECT_DIR$/build/com/brackeen/javagamebook/tilegame/TileGameResourceManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tilegame.jar" afterPath="$PROJECT_DIR$/tilegame.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tilegameres.jar" afterPath="$PROJECT_DIR$/tilegameres.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java" afterPath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java" afterPath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Player.java" afterPath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java" afterPath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java" afterPath="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="javaGame.iws" />
@@ -33,31 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainGameState.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainGameState.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="145" column="77" selection-start-line="145" selection-start-column="77" selection-end-line="145" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileGameResourceManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20436817">
-              <caret line="180" column="9" selection-start-line="180" selection-start-column="9" selection-end-line="180" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Creature.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.82371294">
+              <caret line="337" column="19" selection-start-line="337" selection-start-column="19" selection-end-line="337" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -67,14 +42,32 @@
         <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#283#284#0" expanded="true" />
-                <element signature="e#310#311#0" expanded="true" />
                 <element signature="e#344#345#0" expanded="true" />
                 <element signature="e#370#371#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sprite.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/graphics/Sprite.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileGameResourceManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="243" column="37" selection-start-line="243" selection-start-column="37" selection-end-line="243" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -104,11 +97,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java" />
         <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Player.java" />
         <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java" />
-        <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java" />
         <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java" />
+        <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java" />
+        <option value="$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java" />
       </list>
     </option>
   </component>
@@ -442,7 +435,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446143945087</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="bullets can now fire in either direction">
+      <created>1446145071642</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1446145071642</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -454,12 +453,12 @@
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935917" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935917" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.50280225" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34104937" sideWeight="0.49719775" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24942085" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -481,7 +480,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added bullet creation to player. bullets move, but don't collide with or kill anything" />
-    <option name="LAST_COMMIT_MESSAGE" value="added bullet creation to player. bullets move, but don't collide with or kill anything" />
+    <MESSAGE value="bullets can now fire in either direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="bullets can now fire in either direction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -503,31 +503,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/graphics/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18720749">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#283#284#0" expanded="true" />
-            <element signature="e#310#311#0" expanded="true" />
-            <element signature="e#344#345#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2979719">
+        <state vertical-scroll-proportion="0.32761312">
           <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -535,26 +513,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java">
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Grub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.16380656">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java">
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/Creature.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="77" selection-start-line="145" selection-start-column="77" selection-end-line="145" selection-end-column="77" />
+        <state vertical-scroll-proportion="-0.49141964">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileGameResourceManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20436817">
-          <caret line="180" column="9" selection-start-line="180" selection-start-column="9" selection-end-line="180" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="243" column="37" selection-start-line="243" selection-start-column="37" selection-end-line="243" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/TileMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5553822">
+          <caret line="90" column="25" selection-start-line="90" selection-start-column="16" selection-end-line="90" selection-end-column="25" />
+          <folding>
+            <element signature="e#2238#2239#0" expanded="true" />
+            <element signature="e#2279#2280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/graphics/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/sprites/PlayerBullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/brackeen/javagamebook/tilegame/MainGameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82371294">
+          <caret line="337" column="19" selection-start-line="337" selection-start-column="19" selection-end-line="337" selection-end-column="19" />
           <folding />
         </state>
       </provider>

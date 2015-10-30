@@ -201,6 +201,7 @@ public class MainGameState implements GameState {
             return false;
         }
 
+
         // if one of the Sprites is a dead Creature, return false
         if (s1 instanceof Creature && !((Creature)s1).isAlive()) {
             return false;
@@ -324,6 +325,16 @@ public class MainGameState implements GameState {
             checkPlayerCollision((Player)creature, false);
         }
 
+        Sprite collisionSprite = getSpriteCollision(creature);
+        if (collisionSprite instanceof PlayerBullet){
+            System.out.println("creature go hit");
+            Creature badguy = (Creature) collisionSprite;
+            //play bullet hitting noise
+            badguy.setState(Creature.STATE_DYING);
+        }
+
+
+
         // change y
         float dy = creature.getVelocityY();
         float oldY = creature.getY();
@@ -384,6 +395,7 @@ public class MainGameState implements GameState {
                 player.setState(Creature.STATE_DYING);
             }
         }
+        //else if (collisionSprite instanceof creatureBullet){}
     }
 
 
