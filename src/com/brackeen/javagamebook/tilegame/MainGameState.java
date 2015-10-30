@@ -76,7 +76,7 @@ public class MainGameState implements GameState {
         resourceManager.loadResources();
 
         renderer.setBackground(
-            resourceManager.loadImage("background.png"));
+                resourceManager.loadImage("background.png"));
 
         // load first map
         map = resourceManager.loadNextMap();
@@ -119,7 +119,7 @@ public class MainGameState implements GameState {
         Sequencer sequencer = midiPlayer.getSequencer();
         if (sequencer != null) {
             sequencer.setTrackMute(DRUM_TRACK,
-                !sequencer.getTrackMute(DRUM_TRACK));
+                    !sequencer.getTrackMute(DRUM_TRACK));
         }
     }
 
@@ -168,9 +168,9 @@ public class MainGameState implements GameState {
         int fromTileX = TileMapRenderer.pixelsToTiles(fromX);
         int fromTileY = TileMapRenderer.pixelsToTiles(fromY);
         int toTileX = TileMapRenderer.pixelsToTiles(
-            toX + sprite.getWidth() - 1);
+                toX + sprite.getWidth() - 1);
         int toTileY = TileMapRenderer.pixelsToTiles(
-            toY + sprite.getHeight() - 1);
+                toY + sprite.getHeight() - 1);
 
         // check each tile for a collision
         for (int x=fromTileX; x<=toTileX; x++) {
@@ -279,6 +279,18 @@ public class MainGameState implements GameState {
                     updateCreature(creature, elapsedTime);
                 }
             }
+            else if (sprite instanceof PlayerBullet){
+                if (((PlayerBullet)sprite).isDead()){
+                    i.remove();
+                }
+                else {
+                    float newX = sprite.getX() + sprite.getVelocityX() * elapsedTime;
+                    Point tile = getTileCollision(sprite, newX, sprite.getY());
+                    if (tile != null) {
+                        i.remove();
+                    }
+                }
+            }
             // normal update
             sprite.update(elapsedTime);
         }
@@ -324,13 +336,15 @@ public class MainGameState implements GameState {
         if (creature instanceof Player) {
             checkPlayerCollision((Player)creature, false);
         }
+        else {
+            Sprite collisionSprite = getSpriteCollision(creature);
 
-        Sprite collisionSprite = getSpriteCollision(creature);
-        if (collisionSprite instanceof PlayerBullet){
-            System.out.println("creature go hit");
-            Creature badguy = (Creature) collisionSprite;
-            //play bullet hitting noise
-            badguy.setState(Creature.STATE_DYING);
+            if (collisionSprite instanceof PlayerBullet) {
+                //play bullet hitting noise
+                creature.setState(Creature.STATE_DYING);
+                ((PlayerBullet)collisionSprite).setDead();
+                //map.removeSprite(collisionSprite);
+            }
         }
 
 
