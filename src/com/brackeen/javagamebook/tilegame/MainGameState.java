@@ -28,6 +28,7 @@ public class MainGameState implements GameState {
     private int height;
 
     private long totalTime = 0;
+    private long totalShootTime = 0;
     private long shootTime;
     private long creatureShootTime = 0;
     private int bullet_count = 0;
@@ -139,34 +140,43 @@ public class MainGameState implements GameState {
         Player player = (Player)map.getPlayer();
         if (player.isAlive()) {
             float velocityX = 0;
+            totalShootTime += elapsedTime;
+            totalTime += elapsedTime;
+
             if (moveLeft.isPressed()) {
                 velocityX-=player.getMaxSpeed();
+                totalTime = 0;
             }
             if (moveRight.isPressed()) {
                 velocityX+=player.getMaxSpeed();
+                totalTime = 0;
             }
             if (jump.isPressed()) {
                 player.jump(false);
+                totalTime = 0;
             }
-            totalTime += elapsedTime;
             if (shoot.isPressed()) {
                 long wait_time = 1000;
 
-                if (totalTime >= wait_time){
+                if (totalShootTime >= wait_time){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
-                    totalTime = 0;
+                    totalShootTime = 0;
                     shootTime = 250;
                 }
-                else if (totalTime >= shootTime && bullet_count <= 10) {
+                else if (totalShootTime >= shootTime && bullet_count <= 10) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
-                    totalTime = 0;
+                    totalShootTime = 0;
                     bullet_count++;
                     shootTime = 250;
                 }
             }
             if (shoot.getAmount() == 0){
                 shootTime = 350;
+            }
+            if (totalTime >= 1000){
+                player.motionlessHealth();
+                totalTime = 0;
             }
             player.setVelocityX(velocityX);
         }
@@ -374,6 +384,9 @@ public class MainGameState implements GameState {
         }
         if (creature instanceof Player) {
             checkPlayerCollision((Player)creature, false);
+            if (TileMapRenderer.pixelsToTiles(oldX) != TileMapRenderer.pixelsToTiles(newX)){
+                ((Player)creature).movementHealth();
+            }
         }
         else {
 

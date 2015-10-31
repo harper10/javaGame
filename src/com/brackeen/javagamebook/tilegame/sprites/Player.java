@@ -98,5 +98,14 @@ public class Player extends Creature {
         }
     }
 
+    public void movementHealth(){
+        if (health < healthMax - 1){
+            health += 1;
+        }
+        else {
+            health = healthMax;
+        }
+    }
+
 
 }
