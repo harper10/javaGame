@@ -32,6 +32,7 @@ public class MainGameState implements GameState {
     private long shootTime;
     private long creatureShootTime = 0;
     private int bullet_count = 0;
+    private int tileDist = 0;
 
     private Point pointCache = new Point();
     private Sound prizeSound;
@@ -384,8 +385,10 @@ public class MainGameState implements GameState {
         }
         if (creature instanceof Player) {
             checkPlayerCollision((Player)creature, false);
-            if (TileMapRenderer.pixelsToTiles(oldX) != TileMapRenderer.pixelsToTiles(newX)){
-                ((Player)creature).movementHealth();
+            if (TileMapRenderer.pixelsToTiles(oldX) != TileMapRenderer.pixelsToTiles(newX) && tile == null){
+                if (++tileDist > 12) {
+                    ((Player) creature).movementHealth();
+                }
             }
         }
         else {
