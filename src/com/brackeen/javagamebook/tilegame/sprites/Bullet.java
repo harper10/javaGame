@@ -21,7 +21,7 @@ public class Bullet extends Sprite {
 
     public float getMaxSpeed() {
         if (isPlayerBullet) {
-            return .6f;
+            return .5f;
         }
         else{
             return .25f;
@@ -51,7 +51,7 @@ public class Bullet extends Sprite {
     @Override
     public void update(long elapsedTime) {
         super.update(elapsedTime);
-        int distToDie = 7;
+        int distToDie = 5;
         if (Math.abs((TileMapRenderer.pixelsToTiles(getX()) - startX)) > distToDie){
             setDead();
         }

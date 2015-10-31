@@ -72,7 +72,7 @@ public class Player extends Creature {
     }
 
     public void bulletHit(){
-        if (health > 5){
+        if (health >= 5){
             health -= 5;
         }
         else {

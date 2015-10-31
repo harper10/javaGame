@@ -29,7 +29,7 @@ public class MainGameState implements GameState {
 
     private long totalTime = 0;
     private long shootTime;
-    private long creatureShootTime = 500;
+    private long creatureShootTime = 0;
     private int bullet_count = 0;
 
     private Point pointCache = new Point();
@@ -156,17 +156,17 @@ public class MainGameState implements GameState {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
                     totalTime = 0;
-                    shootTime = 200;
+                    shootTime = 250;
                 }
                 else if (totalTime >= shootTime && bullet_count <= 10) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalTime = 0;
                     bullet_count++;
-                    shootTime = 200;
+                    shootTime = 250;
                 }
             }
             if (shoot.getAmount() == 0){
-                shootTime = 300;
+                shootTime = 350;
             }
             player.setVelocityX(velocityX);
         }
@@ -298,6 +298,7 @@ public class MainGameState implements GameState {
                 Creature creature = (Creature)sprite;
                 if (creature.getState() == Creature.STATE_DEAD) {
                     i.remove();
+                    ((Player)player).creatureDeath();
                 }
                 else {
                     updateCreature(creature, elapsedTime);
@@ -323,6 +324,9 @@ public class MainGameState implements GameState {
         }
         creatureShootTime += elapsedTime;
         long creatureShootInterval = 500;
+        if (creatures.isEmpty()) {
+            creatureShootTime = 0;
+        }
         if (creatureShootTime > creatureShootInterval) {
             for (Creature c : creatures) {
                 resourceManager.addBullet(c, map, c.isFacingRight(), false);
