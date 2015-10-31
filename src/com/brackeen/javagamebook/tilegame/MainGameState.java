@@ -333,7 +333,6 @@ public class MainGameState implements GameState {
             }
             creatureShootTime = 0;
         }
-
     }
 
 
@@ -451,7 +450,8 @@ public class MainGameState implements GameState {
                 player.setState(Creature.STATE_DYING);
             }
         }
-        else if (collisionSprite instanceof Bullet && !((Bullet)collisionSprite).isPlayerBullet){
+        else if (collisionSprite instanceof Bullet && !((Bullet)collisionSprite).isPlayerBullet
+                && !((Bullet)collisionSprite).isDead()){
             ((Bullet)collisionSprite).setDead();
             player.bulletHit();
             if (player.getHealth() == 0){
