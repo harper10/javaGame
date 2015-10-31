@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.brackeen.javagamebook.graphics.Sprite;
 import com.brackeen.javagamebook.tilegame.sprites.Bullet;
 import com.brackeen.javagamebook.tilegame.sprites.Creature;
+import com.brackeen.javagamebook.tilegame.sprites.Player;
 
 /**
     The TileMapRenderer class draws a TileMap on the screen.
@@ -152,6 +153,8 @@ public class TileMapRenderer {
                 ((Bullet)sprite).setDead();
             }
         }
+        g.setColor(Color.black);
+        g.drawString("Health: " + ((Player)player).getHealth(), tilesToPixels(1), tilesToPixels(1));
     }
 
 }
