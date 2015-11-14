@@ -51,6 +51,11 @@ public class Player extends Creature {
         // do nothing
     }
 
+    @Override
+    public void update(long elapsedTime) {
+        super.update(elapsedTime);
+        //TODO add timer to remove effects
+    }
 
     /**
         Makes the player jump if the player is on the ground or

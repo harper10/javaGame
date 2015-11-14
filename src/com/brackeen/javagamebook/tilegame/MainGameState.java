@@ -351,25 +351,21 @@ public class MainGameState implements GameState {
         Updates the creature, applying gravity for creatures that
         aren't flying, and checks collisions.
     */
-    private void updateCreature(Creature creature,
-        long elapsedTime)
+    private void updateCreature(Creature creature, long elapsedTime)
     {
 
         // apply gravity
         if (!creature.isFlying()) {
-            creature.setVelocityY(creature.getVelocityY() +
-                GRAVITY * elapsedTime);
+            creature.setVelocityY(creature.getVelocityY() + GRAVITY * elapsedTime);
         }
 
         // change x
         float dx = creature.getVelocityX();
         float oldX = creature.getX();
         float newX = oldX + dx * elapsedTime;
-        Point tile =
-            getTileCollision(creature, newX, creature.getY());
+        Point tile = getTileCollision(creature, newX, creature.getY());
         if (tile == null) {
             creature.setX(newX);
-
         } else {
             // line up with the tile boundary
             if (dx > 0) {
@@ -417,19 +413,18 @@ public class MainGameState implements GameState {
         else {
             // line up with the tile boundary
             if (dy > 0) {
-                creature.setY(
-                    TileMapRenderer.tilesToPixels(tile.y) -
-                    creature.getHeight());
+                creature.setY(TileMapRenderer.tilesToPixels(tile.y) - creature.getHeight());
             }
             else if (dy < 0) {
-                creature.setY(
-                    TileMapRenderer.tilesToPixels(tile.y + 1));
+                creature.setY(TileMapRenderer.tilesToPixels(tile.y + 1));
             }
             creature.collideVertical();
         }
         if (creature instanceof Player) {
             boolean canKill = (oldY < creature.getY());
             checkPlayerCollision((Player)creature, canKill);
+            //TODO add check type of tile, and appropriate response
+            //TODO also add time checking in the case of effects
         }
 
     }
