@@ -85,6 +85,15 @@ public class Player extends Creature {
         }
     }
 
+    public void explodingDamage(){
+        if (health >= 10){
+            health -= 10;
+        }
+        else {
+            health = 0;
+        }
+    }
+
     public void creatureDeath(){
         if (health < healthMax - 10){
             health += 10;

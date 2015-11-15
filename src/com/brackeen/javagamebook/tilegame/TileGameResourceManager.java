@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.brackeen.javagamebook.graphics.*;
 import com.brackeen.javagamebook.tilegame.sprites.*;
@@ -20,6 +21,8 @@ import com.brackeen.javagamebook.state.ResourceManager;
 public class TileGameResourceManager extends ResourceManager {
 
     private ArrayList tiles;
+    public LinkedList<Point> explodingList = new LinkedList<>();
+    public LinkedList<Point> gasList = new LinkedList<>();
     private int currentMap;
 
     // host sprites used for cloning
@@ -128,6 +131,13 @@ public class TileGameResourceManager extends ResourceManager {
                 int tile = ch - 'A';
                 if (tile >= 0 && tile < tiles.size()) {
                     newMap.setTile(x, y, (Image)tiles.get(tile));
+                    if (tile == (9)){
+                        this.explodingList.add( new Point(x,y) );//add an exploding tile
+                    }
+                    else if (tile == 10){
+                        //TODO add something for gas tiles
+                    }
+
                 }
 
                 // check if the char represents a sprite

@@ -209,11 +209,17 @@ public class MainGameState implements GameState {
         // check each tile for a collision
         for (int x=fromTileX; x<=toTileX; x++) {
             for (int y=fromTileY; y<=toTileY; y++) {
-                if (x < 0 || x >= map.getWidth() ||
-                    map.getTile(x, y) != null)
+                if (x < 0 || x >= map.getWidth() || map.getTile(x, y) != null)
                 {
                     // collision found, return the tile
                     pointCache.setLocation(x, y);
+                    if (resourceManager.explodingList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.explodingList.remove(pointCache);
+                        ((Player)sprite).explodingDamage();
+                    } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.gasList.remove(pointCache);
+                        //TODO add gas tile effect
+                    }
                     return pointCache;
                 }
             }
