@@ -159,13 +159,13 @@ public class MainGameState implements GameState {
             if (shoot.isPressed()) {
                 long wait_time = 1000;
 
-                if (totalShootTime >= wait_time){
+                if (totalShootTime >= wait_time && !player.isGassed()){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
-                else if (totalShootTime >= shootTime && bullet_count <= 10) {
+                else if (totalShootTime >= shootTime && bullet_count <= 10 && !player.isGassed()) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalShootTime = 0;
                     bullet_count++;
@@ -218,7 +218,7 @@ public class MainGameState implements GameState {
                         ((Player)sprite).explodingDamage();
                     } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
                         resourceManager.gasList.remove(pointCache);
-                        //TODO add gas tile effect
+                        ((Player) sprite).setGassed();
                     }
                     return pointCache;
                 }
@@ -429,8 +429,6 @@ public class MainGameState implements GameState {
         if (creature instanceof Player) {
             boolean canKill = (oldY < creature.getY());
             checkPlayerCollision((Player)creature, canKill);
-            //TODO add check type of tile, and appropriate response
-            //TODO also add time checking in the case of effects
         }
 
     }

@@ -135,7 +135,7 @@ public class TileGameResourceManager extends ResourceManager {
                         this.explodingList.add( new Point(x,y) );//add an exploding tile
                     }
                     else if (tile == 10){
-                        //TODO add something for gas tiles
+                        this.gasList.add(new Point(x,y));
                     }
 
                 }
