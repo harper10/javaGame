@@ -37,6 +37,7 @@ public class MainGameState implements GameState {
     private Point pointCache = new Point();
     private Sound prizeSound;
     private Sound boopSound;
+    private Sound bombSound;
     private Sequence music;
     private TileMap map;
     private TileMapRenderer renderer;
@@ -93,6 +94,7 @@ public class MainGameState implements GameState {
         prizeSound = resourceManager.loadSound("sounds/prize.wav");
         boopSound = resourceManager.loadSound("sounds/boop2.wav");
         music = resourceManager.loadSequence("sounds/music.midi");
+        bombSound = resourceManager.loadSound("sounds/bomb-02.wav");
     }
 
     public void start(InputManager inputManager) {
@@ -216,6 +218,7 @@ public class MainGameState implements GameState {
                     if (resourceManager.explodingList.contains(pointCache) && sprite instanceof Player){
                         resourceManager.explodingList.remove(pointCache);
                         ((Player)sprite).explodingDamage();
+                        soundManager.play(bombSound);
                     } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
                         resourceManager.gasList.remove(pointCache);
                         ((Player) sprite).setGassed();
