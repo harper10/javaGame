@@ -13,9 +13,11 @@ public class Player extends Creature {
     private static final float JUMP_SPEED = -.95f;
 
     private boolean onGround;
+    private boolean isGassed = false;
 
     private int health = 20;
     private static final int healthMax = 40;
+    private long time = 0;
 
     public Player(Animation left, Animation right,
         Animation deadLeft, Animation deadRight)
@@ -55,6 +57,11 @@ public class Player extends Creature {
     public void update(long elapsedTime) {
         super.update(elapsedTime);
         //TODO add timer to remove effects
+        time += elapsedTime;
+        if (time >= 1000){
+            isGassed = false;
+            time = 1000;
+        }
     }
 
     /**
@@ -76,9 +83,27 @@ public class Player extends Creature {
         return health;
     }
 
+    public void setGassed(){
+        isGassed = true;
+        time = 0;
+    }
+
+    public boolean isGassed() {
+        return isGassed;
+    }
+
     public void bulletHit(){
         if (health >= 5){
             health -= 5;
+        }
+        else {
+            health = 0;
+        }
+    }
+
+    public void explodingDamage(){
+        if (health >= 10){
+            health -= 10;
         }
         else {
             health = 0;

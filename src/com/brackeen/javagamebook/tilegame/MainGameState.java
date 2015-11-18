@@ -159,13 +159,13 @@ public class MainGameState implements GameState {
             if (shoot.isPressed()) {
                 long wait_time = 1000;
 
-                if (totalShootTime >= wait_time){
+                if (totalShootTime >= wait_time && !player.isGassed()){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
-                else if (totalShootTime >= shootTime && bullet_count <= 10) {
+                else if (totalShootTime >= shootTime && bullet_count <= 10 && !player.isGassed()) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalShootTime = 0;
                     bullet_count++;
@@ -209,11 +209,17 @@ public class MainGameState implements GameState {
         // check each tile for a collision
         for (int x=fromTileX; x<=toTileX; x++) {
             for (int y=fromTileY; y<=toTileY; y++) {
-                if (x < 0 || x >= map.getWidth() ||
-                    map.getTile(x, y) != null)
+                if (x < 0 || x >= map.getWidth() || map.getTile(x, y) != null)
                 {
                     // collision found, return the tile
                     pointCache.setLocation(x, y);
+                    if (resourceManager.explodingList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.explodingList.remove(pointCache);
+                        ((Player)sprite).explodingDamage();
+                    } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.gasList.remove(pointCache);
+                        ((Player) sprite).setGassed();
+                    }
                     return pointCache;
                 }
             }
@@ -423,8 +429,6 @@ public class MainGameState implements GameState {
         if (creature instanceof Player) {
             boolean canKill = (oldY < creature.getY());
             checkPlayerCollision((Player)creature, canKill);
-            //TODO add check type of tile, and appropriate response
-            //TODO also add time checking in the case of effects
         }
 
     }
