@@ -1,0 +1,22 @@
+Oct 31, 2015 10:37:34 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init sound manager
+Oct 31, 2015 10:37:34 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init midi player
+Oct 31, 2015 10:37:34 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init gamecore
+Oct 31, 2015 10:37:35 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init input manager
+Oct 31, 2015 10:37:35 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init resource manager
+Oct 31, 2015 10:37:35 PM com.brackeen.javagamebook.tilegame.GameManager init
+INFO: init game states
+Oct 31, 2015 10:37:35 PM com.brackeen.javagamebook.tilegame.GameManager$1 run
+INFO: loading resources
+Oct 31, 2015 10:37:35 PM com.brackeen.javagamebook.tilegame.GameManager$1 run
+INFO: setting to Splash state
+Oct 31, 2015 10:38:05 PM com.brackeen.javagamebook.tilegame.GameManager stop
+INFO: stopping game
+Oct 31, 2015 10:38:05 PM com.brackeen.javagamebook.tilegame.GameManager stop
+INFO: closing midi player
+Oct 31, 2015 10:38:05 PM com.brackeen.javagamebook.tilegame.GameManager stop
+INFO: closing sound manager

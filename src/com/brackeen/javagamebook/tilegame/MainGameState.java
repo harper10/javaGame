@@ -37,6 +37,7 @@ public class MainGameState implements GameState {
     private Point pointCache = new Point();
     private Sound prizeSound;
     private Sound boopSound;
+    private Sound gunSound;
     private Sequence music;
     private TileMap map;
     private TileMapRenderer renderer;
@@ -93,6 +94,7 @@ public class MainGameState implements GameState {
         prizeSound = resourceManager.loadSound("sounds/prize.wav");
         boopSound = resourceManager.loadSound("sounds/boop2.wav");
         music = resourceManager.loadSequence("sounds/music.midi");
+        gunSound = resourceManager.loadSound("sounds/gun.wav");
     }
 
     public void start(InputManager inputManager) {
@@ -161,12 +163,14 @@ public class MainGameState implements GameState {
 
                 if (totalShootTime >= wait_time){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    soundManager.play(gunSound);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
                 else if (totalShootTime >= shootTime && bullet_count <= 10) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    soundManager.play(gunSound);
                     totalShootTime = 0;
                     bullet_count++;
                     shootTime = 250;
