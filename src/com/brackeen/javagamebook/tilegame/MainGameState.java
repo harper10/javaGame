@@ -36,8 +36,9 @@ public class MainGameState implements GameState {
 
     private Point pointCache = new Point();
     private Sound prizeSound;
-    private Sound boopSound;
+    private Sound boopSound
     private Sound gunSound;
+    private Sound bombSound;
     private Sequence music;
     private TileMap map;
     private TileMapRenderer renderer;
@@ -95,6 +96,7 @@ public class MainGameState implements GameState {
         boopSound = resourceManager.loadSound("sounds/boop2.wav");
         music = resourceManager.loadSequence("sounds/music.midi");
         gunSound = resourceManager.loadSound("sounds/gun.wav");
+        bombSound = resourceManager.loadSound("sounds/bomb-02.wav");
     }
 
     public void start(InputManager inputManager) {
@@ -161,14 +163,14 @@ public class MainGameState implements GameState {
             if (shoot.isPressed()) {
                 long wait_time = 1000;
 
-                if (totalShootTime >= wait_time){
+                if (totalShootTime >= wait_time && !player.isGassed()){
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     soundManager.play(gunSound);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
-                else if (totalShootTime >= shootTime && bullet_count <= 10) {
+                else if (totalShootTime >= shootTime && bullet_count <= 10 && !player.isGassed()) {
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     soundManager.play(gunSound);
                     totalShootTime = 0;
@@ -213,11 +215,18 @@ public class MainGameState implements GameState {
         // check each tile for a collision
         for (int x=fromTileX; x<=toTileX; x++) {
             for (int y=fromTileY; y<=toTileY; y++) {
-                if (x < 0 || x >= map.getWidth() ||
-                    map.getTile(x, y) != null)
+                if (x < 0 || x >= map.getWidth() || map.getTile(x, y) != null)
                 {
                     // collision found, return the tile
                     pointCache.setLocation(x, y);
+                    if (resourceManager.explodingList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.explodingList.remove(pointCache);
+                        ((Player)sprite).explodingDamage();
+                        soundManager.play(bombSound);
+                    } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
+                        resourceManager.gasList.remove(pointCache);
+                        ((Player) sprite).setGassed();
+                    }
                     return pointCache;
                 }
             }
@@ -355,25 +364,21 @@ public class MainGameState implements GameState {
         Updates the creature, applying gravity for creatures that
         aren't flying, and checks collisions.
     */
-    private void updateCreature(Creature creature,
-        long elapsedTime)
+    private void updateCreature(Creature creature, long elapsedTime)
     {
 
         // apply gravity
         if (!creature.isFlying()) {
-            creature.setVelocityY(creature.getVelocityY() +
-                GRAVITY * elapsedTime);
+            creature.setVelocityY(creature.getVelocityY() + GRAVITY * elapsedTime);
         }
 
         // change x
         float dx = creature.getVelocityX();
         float oldX = creature.getX();
         float newX = oldX + dx * elapsedTime;
-        Point tile =
-            getTileCollision(creature, newX, creature.getY());
+        Point tile = getTileCollision(creature, newX, creature.getY());
         if (tile == null) {
             creature.setX(newX);
-
         } else {
             // line up with the tile boundary
             if (dx > 0) {
@@ -421,13 +426,10 @@ public class MainGameState implements GameState {
         else {
             // line up with the tile boundary
             if (dy > 0) {
-                creature.setY(
-                    TileMapRenderer.tilesToPixels(tile.y) -
-                    creature.getHeight());
+                creature.setY(TileMapRenderer.tilesToPixels(tile.y) - creature.getHeight());
             }
             else if (dy < 0) {
-                creature.setY(
-                    TileMapRenderer.tilesToPixels(tile.y + 1));
+                creature.setY(TileMapRenderer.tilesToPixels(tile.y + 1));
             }
             creature.collideVertical();
         }
