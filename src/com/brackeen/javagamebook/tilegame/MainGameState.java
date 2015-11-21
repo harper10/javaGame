@@ -33,10 +33,16 @@ public class MainGameState implements GameState {
     private long creatureShootTime = 0;
     private int bullet_count = 0;
     private int tileDist = 0;
+    private long startime;
+    private long stardistance;
 
     private Point pointCache = new Point();
     private Sound prizeSound;
+    private Sound mushSound;
     private Sound boopSound;
+    private Sound bombSound;
+    private Sound gunSound;
+    private Sound deadSound;
     private Sequence music;
     private TileMap map;
     private TileMapRenderer renderer;
@@ -92,7 +98,11 @@ public class MainGameState implements GameState {
         // load sounds
         prizeSound = resourceManager.loadSound("sounds/prize.wav");
         boopSound = resourceManager.loadSound("sounds/boop2.wav");
+	mushSound = resourceManager.loadSound("sounds/mush.wav");
+	gunSound = resourceManager.loadSound("sounds/gun.wav");
+	deadSound = resourceManager.loadSound("sounds/dead.wav");
         music = resourceManager.loadSequence("sounds/music.midi");
+        bombSound = resourceManager.loadSound("sounds/bomb-02.wav");
     }
 
     public void start(InputManager inputManager) {
@@ -160,13 +170,15 @@ public class MainGameState implements GameState {
                 long wait_time = 1000;
 
                 if (totalShootTime >= wait_time && !player.isGassed()){
+		    soundManager.play(gunSound);
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
                 else if (totalShootTime >= shootTime && bullet_count <= 10 && !player.isGassed()) {
-                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    soundManager.play(gunSound);
+		    resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalShootTime = 0;
                     bullet_count++;
                     shootTime = 250;
@@ -216,6 +228,7 @@ public class MainGameState implements GameState {
                     if (resourceManager.explodingList.contains(pointCache) && sprite instanceof Player){
                         resourceManager.explodingList.remove(pointCache);
                         ((Player)sprite).explodingDamage();
+                        soundManager.play(bombSound);
                     } else if (resourceManager.gasList.contains(pointCache) && sprite instanceof Player){
                         resourceManager.gasList.remove(pointCache);
                         ((Player) sprite).setGassed();
@@ -398,7 +411,7 @@ public class MainGameState implements GameState {
 
             Sprite collisionSprite = getSpriteCollision(creature);
             if (collisionSprite instanceof Bullet && ((Bullet)collisionSprite).isPlayerBullet) {
-                //TODO play bullet hitting noise
+		        soundManager.play(deadSound);
                 creature.setState(Creature.STATE_DYING);
                 ((Bullet)collisionSprite).setDead();
             }
@@ -462,13 +475,20 @@ public class MainGameState implements GameState {
             }
             else {
                 // player dies!
-                player.setState(Creature.STATE_DYING);
+		if(!player.isStarred())
+		    player.setState(Creature.STATE_DYING);
+		else{
+		    soundManager.play(deadSound);
+		    badguy.setState(Creature.STATE_DYING);
+		}
+		    
             }
         }
         else if (collisionSprite instanceof Bullet && !((Bullet)collisionSprite).isPlayerBullet
                 && !((Bullet)collisionSprite).isDead()){
             ((Bullet)collisionSprite).setDead();
-            player.bulletHit();
+	    if(!player.isStarred())
+		player.bulletHit();
             if (player.getHealth() == 0){
                 player.setState(Creature.STATE_DEAD);
             }
@@ -486,12 +506,18 @@ public class MainGameState implements GameState {
 
         if (powerUp instanceof PowerUp.Star) {
             // do something here, like give the player points
+            Player player = (Player) map.getPlayer();
+	        player.gotstar();
             soundManager.play(prizeSound);
         }
         else if (powerUp instanceof PowerUp.Music) {
             // change the music
-            soundManager.play(prizeSound);
-            toggleDrumPlayback();
+            Player player = (Player) map.getPlayer();
+	        player.motionlessHealth();
+            soundManager.play(mushSound);
+            //toggleDrumPlayback();
+	   
+
         }
         else if (powerUp instanceof PowerUp.Goal) {
             // advance to next map

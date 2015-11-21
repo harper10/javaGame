@@ -4,6 +4,7 @@ import com.brackeen.javagamebook.graphics.Animation;
 import com.brackeen.javagamebook.graphics.Sprite;
 import com.brackeen.javagamebook.tilegame.TileGameResourceManager;
 import com.brackeen.javagamebook.tilegame.TileMap;
+import com.brackeen.javagamebook.tilegame.TileMapRenderer;
 
 /**
     The Player.
@@ -14,10 +15,15 @@ public class Player extends Creature {
 
     private boolean onGround;
     private boolean isGassed = false;
+    private boolean starred = false;
 
     private int health = 20;
     private static final int healthMax = 40;
     private long time = 0;
+    private long startime = 0;
+    private int starx;
+    private int stary;
+    private int stardistance;
 
     public Player(Animation left, Animation right,
         Animation deadLeft, Animation deadRight)
@@ -58,11 +64,23 @@ public class Player extends Creature {
         super.update(elapsedTime);
         //TODO add timer to remove effects
         time += elapsedTime;
+	if(starred){
+	    startime += elapsedTime;
+	    stardistance += Math.abs(TileMapRenderer.pixelsToTiles(getX()) - starx) +  Math.abs(TileMapRenderer.pixelsToTiles(getY()) - stary);
+	    starx = TileMapRenderer.pixelsToTiles(getX());
+	    stary = TileMapRenderer.pixelsToTiles(getY());
+	    if (startime >= 1000 || stardistance >= 10)
+		starred = false;
+	}
+	    
         if (time >= 1000){
             isGassed = false;
             time = 1000;
         }
-    }
+	
+	
+	
+   }
 
     /**
         Makes the player jump if the player is on the ground or
@@ -136,6 +154,14 @@ public class Player extends Creature {
             health = healthMax;
         }
     }
-
-
+    public void gotstar(){
+	starred = true;
+	startime = 0;
+	stardistance = 0;
+	starx = TileMapRenderer.pixelsToTiles(getX());
+	stary = TileMapRenderer.pixelsToTiles(getY());
+    }
+    public boolean isStarred() {
+        return starred;
+    }
 }

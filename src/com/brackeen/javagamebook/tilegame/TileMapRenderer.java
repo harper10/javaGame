@@ -155,6 +155,8 @@ public class TileMapRenderer {
         }
         g.setColor(Color.black);
         g.drawString("Health: " + ((Player)player).getHealth(), tilesToPixels(1), tilesToPixels(1));
+	    if(((Player)player).isStarred())
+	    g.drawString("Starred",tilesToPixels(1),tilesToPixels(2));
     }
 
 }
