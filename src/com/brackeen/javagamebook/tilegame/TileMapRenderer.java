@@ -9,19 +9,22 @@ import com.brackeen.javagamebook.tilegame.sprites.Creature;
 import com.brackeen.javagamebook.tilegame.sprites.Player;
 
 /**
-    The TileMapRenderer class draws a TileMap on the screen.
-    It draws all tiles, sprites, and an optional background image
-    centered around the position of the player.
-
-    <p>If the width of background image is smaller the width of
-    the tile map, the background image will appear to move
-    slowly, creating a parallax background effect.
-
-    <p>Also, three static methods are provided to convert pixels
-    to tile positions, and vice-versa.
-
-    <p>This TileMapRender uses a tile size of 64.
-*/
+ * The TileMapRenderer class draws a TileMap on the screen. It draws all tiles,
+ * sprites, and an optional background image centered around the position of the
+ * player.
+ * 
+ * <p>
+ * If the width of background image is smaller the width of the tile map, the
+ * background image will appear to move slowly, creating a parallax background
+ * effect.
+ * 
+ * <p>
+ * Also, three static methods are provided to convert pixels to tile positions,
+ * and vice-versa.
+ * 
+ * <p>
+ * This TileMapRender uses a tile size of 64.
+ */
 public class TileMapRenderer {
 
     private static final int TILE_SIZE = 64;

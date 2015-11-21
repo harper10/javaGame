@@ -89,8 +89,7 @@ public class MainGameState implements GameState {
 
         resourceManager.loadResources();
 
-        renderer.setBackground(
-                resourceManager.loadImage("background.png"));
+        renderer.setBackground(resourceManager.loadImage("background.png"));
 
         // load first map
         map = resourceManager.loadNextMap();
@@ -98,9 +97,9 @@ public class MainGameState implements GameState {
         // load sounds
         prizeSound = resourceManager.loadSound("sounds/prize.wav");
         boopSound = resourceManager.loadSound("sounds/boop2.wav");
-	mushSound = resourceManager.loadSound("sounds/mush.wav");
-	gunSound = resourceManager.loadSound("sounds/gun.wav");
-	deadSound = resourceManager.loadSound("sounds/dead.wav");
+        mushSound = resourceManager.loadSound("sounds/mush.wav");
+        gunSound = resourceManager.loadSound("sounds/gun.wav");
+        deadSound = resourceManager.loadSound("sounds/dead.wav");
         music = resourceManager.loadSequence("sounds/music.midi");
         bombSound = resourceManager.loadSound("sounds/bomb-02.wav");
     }
@@ -172,13 +171,14 @@ public class MainGameState implements GameState {
                 if (totalShootTime >= wait_time && !player.isGassed()){
 		    soundManager.play(gunSound);
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
+                    soundManager.play(gunSound);
                     bullet_count = 1;
                     totalShootTime = 0;
                     shootTime = 250;
                 }
                 else if (totalShootTime >= shootTime && bullet_count <= 10 && !player.isGassed()) {
+                    resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     soundManager.play(gunSound);
-		    resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     totalShootTime = 0;
                     bullet_count++;
                     shootTime = 250;
@@ -213,10 +213,8 @@ public class MainGameState implements GameState {
         // get the tile locations
         int fromTileX = TileMapRenderer.pixelsToTiles(fromX);
         int fromTileY = TileMapRenderer.pixelsToTiles(fromY);
-        int toTileX = TileMapRenderer.pixelsToTiles(
-                toX + sprite.getWidth() - 1);
-        int toTileY = TileMapRenderer.pixelsToTiles(
-                toY + sprite.getHeight() - 1);
+        int toTileX = TileMapRenderer.pixelsToTiles(toX + sprite.getWidth() - 1);
+        int toTileY = TileMapRenderer.pixelsToTiles(toY + sprite.getHeight() - 1);
 
         // check each tile for a collision
         for (int x=fromTileX; x<=toTileX; x++) {

@@ -12,12 +12,10 @@ import com.brackeen.javagamebook.sound.MidiPlayer;
 import com.brackeen.javagamebook.sound.SoundManager;
 import com.brackeen.javagamebook.state.ResourceManager;
 
-
 /**
-    The ResourceManager class loads and manages tile Images and
-    "host" Sprites used in the game. Game Sprites are cloned from
-    "host" Sprites.
-*/
+ * The ResourceManager class loads and manages tile Images and "host" Sprites
+ * used in the game. Game Sprites are cloned from "host" Sprites.
+ */
 public class TileGameResourceManager extends ResourceManager {
 
     private ArrayList tiles;
