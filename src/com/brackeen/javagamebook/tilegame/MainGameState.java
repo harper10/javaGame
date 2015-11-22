@@ -169,7 +169,6 @@ public class MainGameState implements GameState {
                 long wait_time = 1000;
 
                 if (totalShootTime >= wait_time && !player.isGassed()){
-		    soundManager.play(gunSound);
                     resourceManager.addBullet(player, map, player.isFacingRight(), true);
                     soundManager.play(gunSound);
                     bullet_count = 1;
